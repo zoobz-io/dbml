@@ -1,3 +1,4 @@
+// Package dbml provides a fluent API for building DBML schemas programmatically.
 package dbml
 
 // NewProject creates a new DBML project.

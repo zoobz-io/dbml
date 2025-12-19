@@ -5,13 +5,18 @@ import (
 	"testing"
 )
 
+const (
+	testDBName    = "test_db"
+	testTableName = "users"
+)
+
 func TestProject(t *testing.T) {
-	project := NewProject("test_db").
+	project := NewProject(testDBName).
 		WithDatabaseType("PostgreSQL").
 		WithNote("Test database")
 
-	if project.Name != "test_db" {
-		t.Errorf("Expected name 'test_db', got '%s'", project.Name)
+	if project.Name != testDBName {
+		t.Errorf("Expected name '%s', got '%s'", testDBName, project.Name)
 	}
 
 	if project.DatabaseType == nil || *project.DatabaseType != "PostgreSQL" {
@@ -24,7 +29,7 @@ func TestProject(t *testing.T) {
 }
 
 func TestTable(t *testing.T) {
-	table := NewTable("users").
+	table := NewTable(testTableName).
 		WithSchema("auth").
 		WithAlias("u").
 		WithHeaderColor("#FF0000").
@@ -33,8 +38,8 @@ func TestTable(t *testing.T) {
 		AddColumn(NewColumn("id", "int")).
 		AddIndex(NewIndex("id"))
 
-	if table.Name != "users" {
-		t.Errorf("Expected name 'users', got '%s'", table.Name)
+	if table.Name != testTableName {
+		t.Errorf("Expected name '%s', got '%s'", testTableName, table.Name)
 	}
 
 	if table.Schema != "auth" {
@@ -93,7 +98,7 @@ func TestColumn(t *testing.T) {
 
 func TestColumnWithRef(t *testing.T) {
 	col := NewColumn("user_id", "bigint").
-		WithRef(ManyToOne, "public", "users", "id")
+		WithRef(ManyToOne, "public", testTableName, "id")
 
 	if col.InlineRef == nil {
 		t.Fatal("Expected InlineRef to be set")
@@ -103,8 +108,8 @@ func TestColumnWithRef(t *testing.T) {
 		t.Error("Expected ManyToOne relationship")
 	}
 
-	if col.InlineRef.Table != "users" {
-		t.Errorf("Expected table 'users', got '%s'", col.InlineRef.Table)
+	if col.InlineRef.Table != testTableName {
+		t.Errorf("Expected table '%s', got '%s'", testTableName, col.InlineRef.Table)
 	}
 }
 

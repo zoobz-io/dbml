@@ -86,6 +86,7 @@ type InlineRef struct {
 // RelType represents relationship cardinality.
 type RelType string
 
+// Relationship cardinality constants.
 const (
 	OneToMany  RelType = "<"
 	ManyToOne  RelType = ">"
@@ -96,6 +97,7 @@ const (
 // RefAction represents referential actions.
 type RefAction string
 
+// Referential action constants.
 const (
 	Cascade    RefAction = "cascade"
 	Restrict   RefAction = "restrict"

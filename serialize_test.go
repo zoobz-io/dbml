@@ -8,7 +8,7 @@ import (
 )
 
 func TestProject_ToJSON(t *testing.T) {
-	project := NewProject("test_db").
+	project := NewProject(testDBName).
 		WithDatabaseType("PostgreSQL").
 		WithNote("Test database")
 
@@ -31,8 +31,8 @@ func TestProject_ToJSON(t *testing.T) {
 	}
 
 	// Verify basic structure
-	if result["Name"] != "test_db" {
-		t.Errorf("Expected Name='test_db', got '%v'", result["Name"])
+	if result["Name"] != testDBName {
+		t.Errorf("Expected Name='%s', got '%v'", testDBName, result["Name"])
 	}
 }
 
@@ -70,8 +70,8 @@ func TestProject_FromJSON(t *testing.T) {
 		t.Fatalf("FromJSON failed: %v", err)
 	}
 
-	if project.Name != "test_db" {
-		t.Errorf("Expected Name='test_db', got '%s'", project.Name)
+	if project.Name != testDBName {
+		t.Errorf("Expected Name='%s', got '%s'", testDBName, project.Name)
 	}
 
 	if project.DatabaseType == nil || *project.DatabaseType != "PostgreSQL" {
@@ -102,7 +102,7 @@ func TestProject_FromJSON(t *testing.T) {
 }
 
 func TestProject_ToYAML(t *testing.T) {
-	project := NewProject("test_db").
+	project := NewProject(testDBName).
 		WithDatabaseType("MySQL").
 		WithNote("Test database")
 
@@ -125,8 +125,8 @@ func TestProject_ToYAML(t *testing.T) {
 	}
 
 	// Verify basic structure
-	if result["name"] != "test_db" {
-		t.Errorf("Expected name='test_db', got '%v'", result["name"])
+	if result["name"] != testDBName {
+		t.Errorf("Expected name='%s', got '%v'", testDBName, result["name"])
 	}
 }
 
@@ -165,8 +165,8 @@ refs: null
 		t.Fatalf("FromYAML failed: %v", err)
 	}
 
-	if project.Name != "test_db" {
-		t.Errorf("Expected Name='test_db', got '%s'", project.Name)
+	if project.Name != testDBName {
+		t.Errorf("Expected Name='%s', got '%s'", testDBName, project.Name)
 	}
 
 	if project.DatabaseType == nil || *project.DatabaseType != "MySQL" {
@@ -198,7 +198,7 @@ refs: null
 
 func TestProject_RoundTrip_JSON(t *testing.T) {
 	// Create a complex project
-	original := NewProject("test_db").
+	original := NewProject(testDBName).
 		WithDatabaseType("PostgreSQL").
 		WithNote("Round trip test")
 
@@ -248,7 +248,7 @@ func TestProject_RoundTrip_JSON(t *testing.T) {
 
 func TestProject_RoundTrip_YAML(t *testing.T) {
 	// Create a project with enums and table groups
-	original := NewProject("test_db").
+	original := NewProject(testDBName).
 		WithDatabaseType("MySQL")
 
 	status := NewEnum("status", "active", "inactive").
