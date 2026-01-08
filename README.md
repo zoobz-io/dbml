@@ -11,19 +11,33 @@
 
 A Go package for building and generating [DBML (Database Markup Language)](https://dbml.dbdiagram.io/docs/) programmatically.
 
-## Features
+## Schema as Code
 
-- **Complete DBML Support**: Projects, tables, columns, indexes, relationships, enums, and table groups
-- **Fluent Builder API**: Chainable methods for easy schema construction
-- **DBML Generation**: Convert Go structs to DBML syntax
-- **Validation**: Comprehensive validation of schema structures
-- **Type Safety**: Strongly typed relationships and constraints
+Define database schemas with Go's type safety and generate DBML for visualisation tools like dbdiagram.io:
+
+```go
+project := dbml.NewProject("ecommerce").
+    WithDatabaseType("PostgreSQL")
+
+project.AddTable(
+    dbml.NewTable("orders").
+        AddColumn(dbml.NewColumn("id", "bigint").WithPrimaryKey()).
+        AddColumn(dbml.NewColumn("user_id", "bigint").
+            WithRef(dbml.ManyToOne, "public", "users", "id")),
+)
+
+fmt.Println(project.Generate())
+```
+
+Schemas become testable, version-controlled, and composable.
 
 ## Installation
 
 ```bash
 go get github.com/zoobzio/dbml
 ```
+
+Requires Go 1.24 or higher.
 
 ## Quick Start
 
@@ -36,11 +50,9 @@ import (
 )
 
 func main() {
-    // Create a new project
     project := dbml.NewProject("my_database").
         WithDatabaseType("PostgreSQL")
 
-    // Create a table
     users := dbml.NewTable("users").
         AddColumn(
             dbml.NewColumn("id", "bigint").
@@ -56,15 +68,12 @@ func main() {
                 WithDefault("now()"),
         )
 
-    // Add table to project
     project.AddTable(users)
 
-    // Validate
     if err := project.Validate(); err != nil {
         panic(err)
     }
 
-    // Generate DBML
     fmt.Println(project.Generate())
 }
 ```
@@ -74,7 +83,6 @@ func main() {
 ### Tables with Relationships
 
 ```go
-// Create tables
 users := dbml.NewTable("users").
     AddColumn(dbml.NewColumn("id", "bigint").WithPrimaryKey())
 
@@ -141,17 +149,33 @@ group := dbml.NewTableGroup("User Management").
 project.AddTableGroup(group)
 ```
 
+## Capabilities
+
+| Feature | Description |
+| ------- | ----------- |
+| Type-safe schemas | Catch errors at compile time, not when generating output |
+| Fluent builder API | Chainable methods make schema construction readable |
+| Built-in validation | Validate schemas before generation to catch structural issues |
+| Serialisation | Export schemas to JSON or YAML for storage and interchange |
+| Minimal dependencies | Only requires `gopkg.in/yaml.v3` |
+
+## Why dbml?
+
+- **Schema as code** — Version control, test, and compose database schemas like any other Go code
+- **Visualisation ready** — Generate DBML for tools like dbdiagram.io directly from your definitions
+- **Single source of truth** — Define once, generate documentation and diagrams from the same source
+
 ## API Reference
 
 ### Core Types
 
-- **Project**: Top-level container for database schema
-- **Table**: Database table definition
-- **Column**: Table column with type and constraints
-- **Index**: Single/composite/expression-based indexes
-- **Ref**: Relationships between tables
-- **Enum**: Enumeration types
-- **TableGroup**: Logical grouping of tables
+- **Project** - Top-level container for database schema
+- **Table** - Database table definition
+- **Column** - Table column with type and constraints
+- **Index** - Single, composite, or expression-based indexes
+- **Ref** - Relationships between tables
+- **Enum** - Enumeration types
+- **TableGroup** - Logical grouping of tables
 
 ### Relationship Types
 
@@ -175,8 +199,6 @@ const (
     NoAction   RefAction = "no action"
 )
 ```
-
-## Methods
 
 ### Project Methods
 
@@ -231,6 +253,10 @@ const (
 - `WithOnDelete(action RefAction) *Ref`
 - `WithOnUpdate(action RefAction) *Ref`
 - `WithColor(color string) *Ref`
+
+## Contributing
+
+Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup and guidelines.
 
 ## License
 

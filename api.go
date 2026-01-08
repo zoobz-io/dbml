@@ -1,3 +1,36 @@
+// Package dbml provides types and utilities for building and generating
+// Database Markup Language (DBML) schemas programmatically.
+//
+// DBML is a domain-specific language for defining database structures,
+// commonly used with tools like dbdiagram.io for visualization.
+//
+// # Basic Usage
+//
+// Create a project, add tables with columns, and generate DBML output:
+//
+//	project := dbml.NewProject("mydb").
+//		WithDatabaseType("PostgreSQL")
+//
+//	users := dbml.NewTable("users").
+//		AddColumn(dbml.NewColumn("id", "bigint").WithPrimaryKey()).
+//		AddColumn(dbml.NewColumn("email", "varchar(255)").WithUnique())
+//
+//	project.AddTable(users)
+//	fmt.Println(project.Generate())
+//
+// # Relationships
+//
+// Define relationships between tables using inline refs or standalone refs:
+//
+//	// Inline ref on a column
+//	dbml.NewColumn("user_id", "bigint").
+//		WithRef(dbml.ManyToOne, "public", "users", "id")
+//
+//	// Standalone ref with actions
+//	dbml.NewRef(dbml.ManyToOne).
+//		From("public", "posts", "user_id").
+//		To("public", "users", "id").
+//		WithOnDelete(dbml.Cascade)
 package dbml
 
 // Project represents the top-level DBML project.
