@@ -1,4 +1,4 @@
-module github.com/zoobzio/dbml
+module github.com/zoobz-io/dbml
 
 go 1.24
 

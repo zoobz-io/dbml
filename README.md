@@ -1,13 +1,13 @@
 # DBML - Database Markup Language for Go
 
-[![CI Status](https://github.com/zoobzio/dbml/workflows/CI/badge.svg)](https://github.com/zoobzio/dbml/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/zoobzio/dbml/graph/badge.svg?branch=main)](https://codecov.io/gh/zoobzio/dbml)
-[![Go Report Card](https://goreportcard.com/badge/github.com/zoobzio/dbml)](https://goreportcard.com/report/github.com/zoobzio/dbml)
-[![CodeQL](https://github.com/zoobzio/dbml/workflows/CodeQL/badge.svg)](https://github.com/zoobzio/dbml/security/code-scanning)
-[![Go Reference](https://pkg.go.dev/badge/github.com/zoobzio/dbml.svg)](https://pkg.go.dev/github.com/zoobzio/dbml)
-[![License](https://img.shields.io/github/license/zoobzio/dbml)](LICENSE)
-[![Go Version](https://img.shields.io/github/go-mod/go-version/zoobzio/dbml)](go.mod)
-[![Release](https://img.shields.io/github/v/release/zoobzio/dbml)](https://github.com/zoobzio/dbml/releases)
+[![CI Status](https://github.com/zoobz-io/dbml/workflows/CI/badge.svg)](https://github.com/zoobz-io/dbml/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/zoobz-io/dbml/graph/badge.svg?branch=main)](https://codecov.io/gh/zoobz-io/dbml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/zoobz-io/dbml)](https://goreportcard.com/report/github.com/zoobz-io/dbml)
+[![CodeQL](https://github.com/zoobz-io/dbml/workflows/CodeQL/badge.svg)](https://github.com/zoobz-io/dbml/security/code-scanning)
+[![Go Reference](https://pkg.go.dev/badge/github.com/zoobz-io/dbml.svg)](https://pkg.go.dev/github.com/zoobz-io/dbml)
+[![License](https://img.shields.io/github/license/zoobz-io/dbml)](LICENSE)
+[![Go Version](https://img.shields.io/github/go-mod/go-version/zoobz-io/dbml)](go.mod)
+[![Release](https://img.shields.io/github/v/release/zoobz-io/dbml)](https://github.com/zoobz-io/dbml/releases)
 
 A Go package for building and generating [DBML (Database Markup Language)](https://dbml.dbdiagram.io/docs/) programmatically.
 
@@ -34,7 +34,7 @@ Schemas become testable, version-controlled, and composable.
 ## Installation
 
 ```bash
-go get github.com/zoobzio/dbml
+go get github.com/zoobz-io/dbml
 ```
 
 Requires Go 1.24 or higher.
@@ -46,7 +46,7 @@ package main
 
 import (
     "fmt"
-    "github.com/zoobzio/dbml"
+    "github.com/zoobz-io/dbml"
 )
 
 func main() {
