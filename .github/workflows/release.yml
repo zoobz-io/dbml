@@ -31,8 +31,7 @@ jobs:
     - name: Verify go.mod is tidy
       run: |
         go mod tidy
-        git diff --exit-code go.mod
-        if [ -f go.sum ]; then git diff --exit-code go.sum; fi
+        git diff --exit-code go.mod go.sum
 
   release:
     name: Release
