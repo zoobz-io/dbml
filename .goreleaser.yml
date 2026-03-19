@@ -78,7 +78,7 @@ changelog:
 # Release configuration
 release:
   github:
-    owner: zoobzio
+    owner: zoobz-io
     name: dbml
 
   # Release name template
@@ -102,7 +102,7 @@ release:
     ### Installation
 
     ```bash
-    go get github.com/zoobzio/dbml@v{{ .Version }}
+    go get github.com/zoobz-io/dbml@v{{ .Version }}
     ```
 
     ### Requirements
@@ -112,7 +112,7 @@ release:
   footer: |
     ---
 
-    **Full Documentation:** https://github.com/zoobzio/dbml/tree/v{{ .Version }}
+    **Full Documentation:** https://github.com/zoobz-io/dbml/tree/v{{ .Version }}
     **DBML Specification:** https://dbml.dbdiagram.io/docs/
 
     Thanks to all contributors!
